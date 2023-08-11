@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.css";
+/* import "./style.css"; */
 import TableContainer from './Component/Table/TableContainer.js';
 import Login from "./Component/Login/Login.js";
 import Header from "./Component/header/Header";

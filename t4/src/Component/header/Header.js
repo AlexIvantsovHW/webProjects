@@ -1,28 +1,33 @@
-import React  from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
+import { button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { tableAC } from "../../redux/TableReducer";
 
-const Header=(props)=>{
+import { tableAC } from "../../redux/TableReducer";
+import { navLink, targetUser } from "../CommonFunc";
+import { NavLink } from "react-router-dom";
+
+const Header = (props) => {
   let link;
-      if(props.table.table[0].name===props.table.auth.name){link='/'}
-      else{link='/login'}
-  {
-    return (
-      <div className="header">
-        <NavLink to="/login">
-          <Button>Login</Button>
-        </NavLink>
-        <NavLink to={link}>
-          <Button>User manager</Button>
-        </NavLink>
-      </div>
-    );
-  }
+  /* let db=props.table.table;
+  let tName=props.table.auth.name;
+      let auth=props.table.auth;
+      debugger;
+      if (tName != db[targetUser(db,tName)].name) {link='/login'} 
+      else {link='/'}  */
+  link = "/";
+  
+  return (
+    <div className="bg-primary.bg-gradient">
+      <ul class="nav justify-content-center">
+        {navLink("/login", "Login")}
+        {navLink("/", "User management")}
+        {navLink("/registration", "Registration")}
+      </ul>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {
   return { table: state.table };
 };
-export default connect(mapStateToProps, {tableAC})(Header);
+export default connect(mapStateToProps, { tableAC })(Header);

@@ -9,12 +9,12 @@ function TextError(props) {
 }
 export function Regform(name) {
   return (
-    <div>
+    <div className="mb-5">
       <Field
+      className="form-control form-control-lg ml-10" component='input'
         name={name}
         placeholder={name}
         type={"input"}
-        className="Add_input"
       />
       <ErrorMessage name={name} component={TextError} className="Error" />
     </div>

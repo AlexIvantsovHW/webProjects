@@ -4,10 +4,17 @@
     header('Access-Control-Allow-Methods:POST,GET,OPTIONS,PUT,DELETE');
 header('Access-Control-Allow-Headers:Content-Type, X-Auth-Token, Origin,Authorization');
     // * (Имя хоста, Пользователь в phpAdmin, пароль в phpAdmin, имя БД)
-    $server="localhost";
+   $server="localhost";
 	$user="root";
 	$password="";
 	$db="id21119780_4tsk";
+
+    //------------------
+    /* $server="localhost";
+	$user="id21130992_itaske";
+	$password="Qwerty1!";
+	$db="id21130992_itaske"; */ 
+    //-------------------
     $method=$_SERVER['REQUEST_METHOD'];
 
     $conn=new mysqli($server,$user,$password,$db);

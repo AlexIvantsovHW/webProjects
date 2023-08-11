@@ -5,7 +5,7 @@
 }
 .header{
     width: 100vw;
-    height: 100px;
+    height: 10px;
     top: 0;
     left: 0;
     background-color: rgb(63, 63, 100);
@@ -13,10 +13,9 @@
     position: fixed;
     z-index: 10;
 }
-.body{
+body{
     margin-top: 100px;
     width: 100%;
     min-height: calc(100vh - 100px);    
     max-height: fit-content;
-    border: solid gray 0.5px;
 }
