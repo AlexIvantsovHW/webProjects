@@ -15,7 +15,7 @@ class TableContainer extends React.Component {
       }
 
   componentDidUpdate(prevProps,prevState){if(prevProps.table!==this.props.table){this.setState(this.props.table)}}
-    render() {return(<><Table {...this.props}/></>)}
+    render() {return(<><Table tableAC={this.props.tableAC}{...this.props}/></>)}
 }
 const mapStateToProps=(state)=>{return{table:state.table}}
 

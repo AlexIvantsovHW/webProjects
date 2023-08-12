@@ -1,8 +1,29 @@
 import axios from "axios";
 
+const updateData=(tableAC)=>{
+  const url="http://localhost/t4/src/Component/Table/data.php";
+    axios
+        .get(url).then(response=>response.data)
+        .then((data)=>{tableAC({data})}); 
+}
+const userRequest=(method,name,url,data,tableAC)=>{
+  axios({
+    method: method,
+    name: name,
+    url: url,
+    data: data,
+    config: { headers: { "Content-Type": "multipart/form-data" } },
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
+    updateData(tableAC);
+}
 const API = {
-  getForm(fData,userAC,values) {
-    debugger;
+  getForm(fData,userAC,values,tableAC) {
     axios({
       method: "post",
       url: "http://localhost/t4/src/Component/Registration/form.php",
@@ -15,92 +36,33 @@ const API = {
       .catch(function (response) {
         console.log(response.response.data);
       })
-      debugger;
     console.log("Form submit data", values);
     userAC({ name: values.name, password: values.password });
   },
-  getBlock(isChecked) {
+  getBlock(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    axios({
-      method: "post",
-      name: "block",
-      url: "http://localhost/t4/src/Component/Table/block.php",
-      data: data,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response);
-      });
+    const url="http://localhost/t4/src/Component/Table/block.php";
+    userRequest('post','block',url,data,tableAC)
   },
 
-  getUnBlock(isChecked) {
-    debugger;
+  getUnBlock(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    axios({
-      method: "post",
-      name: "unblock",
-      url: "http://localhost/t4/src/Component/Table/active.php",
-      data: data,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response);
-      });
+    const url="http://localhost/t4/src/Component/Table/active.php";
+    userRequest('post','unblock',url,data,tableAC)
   },
-  getDelete(isChecked) {
+  getDelete(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    axios({
-      method: "post",
-      url: "http://localhost/t4/src/Component/Table/delete.php",
-      data: data,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response);
-      });
+    const url="http://localhost/t4/src/Component/Table/delete.php";
+    userRequest('post','delete',url,data,tableAC)
   },
-  getDelAll() {
+  getDelAll(tableAC) {
     const data = JSON.stringify("dataTable");
-    axios({
-      method: "post",
-      name: "deleteAll",
-      url: "http://localhost/t4/src/Component/Table/allDelete.php",
-      data: data,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response);
-      });
-    debugger;
+    const url="http://localhost/t4/src/Component/Table/allDelete.php";
+    userRequest('post','deleteAll',url,data,tableAC)
   },
-  getLog(fData,) {
-    debugger;
-    axios({
-      method: "post",
-      url: "http://localhost/t4/src/Component/Login/Log.php",
-      data: fData,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response.response.data);
-      })
-      debugger;
-    ;
+  getLog(fData,tableAC) {
+    const url="http://localhost/t4/src/Component/Table/allDelete.php";
+    userRequest('post','deleteAll',url,fData,tableAC);
   },
 };
 
