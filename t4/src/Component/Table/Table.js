@@ -14,7 +14,9 @@ const Table = (props) => {
       setChecked(isChecked.filter((e) => e !== value));
      }
   };
-
+const block=()=>{
+  API.getBlock(isChecked,props.tableAC)
+}
   function tD (el,status){let x;(status!='Active'?x='bg-warning':x='bg-success');return (<td className={x}>{el}</td>)};
   return (
     <div className="table-responsive mt-5">
@@ -24,12 +26,13 @@ const Table = (props) => {
 </svg>
       <button className="mt-10 btn btn-danger mx-auto " onClick={()=>{API.getDelete(isChecked,props.tableAC)}}>Delete</button>
       <button className="mt-10 btn btn-success mx-auto" onClick={()=>{API.getUnBlock(isChecked,props.tableAC)}}>Unblock</button>
-      <button className="mt-10 btn btn-warning mx-auto" onClick={()=>{API.getBlock(isChecked,props.tableAC)}}>Block</button>
+      <button className="mt-10 btn btn-warning mx-auto" onClick={block}>Block</button>
       </div>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col"> <button className='mt-10 btn btn-danger mx-auto' onClick={()=>{API.getDelAll(props.tableAC)}}>All</button></th>
+            <th scope="col"> 
+            <button className='mt-10 btn btn-danger mx-auto' onClick={()=>{API.getDelAll(props.tableAC)}}>All</button></th>
             <th scope="col">id</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>

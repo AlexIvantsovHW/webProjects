@@ -3,16 +3,17 @@ import { Button } from "react-bootstrap";
 import moment from"moment";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { userAC,clearAC } from "../../redux/TableReducer";
+import { userAC,clearAC,tableAC } from "../../redux/TableReducer";
 import { Field, reduxForm } from "redux-form";
 import { targetUser } from "../CommonFunc";
 import API from "../../API/API";
-
+import axios from "axios";
 
 const date = moment().format('YYYY-MM-DD HH:mm:ss');
 
-
 const LoginForm = (props) => { 
+
+
   return (
     <div className="mb-3 d-flex justify-content-evenly">
       <form onSubmit={props.handleSubmit}>
@@ -35,23 +36,57 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
 const Login = (props) => {
+  async function req(){
+    const url="http://localhost/t4/src/Component/Table/data.php";
+    const res=await axios.get(url);
+    return res.data;
+  }
+
+
+
   const navigate=useNavigate();
-  const onSubmit=(formData)=>{
-      let db=props.table.table;
-      let tName=formData.name;
-        let fData = new FormData();
+  async function onSubmit(formData){
+    let fData = new FormData();  
+    const db= props.table.table;
+    const tName=formData.name;
         fData.append("tLog",date);
         fData.append("name",formData.name);
         fData.append("password",formData.password);
-        props.clearAC();
+        async function tesT(){
+          debugger;
+          const data= await req();
+          debugger;
+          const b=await props.tableAC({data});
+          debugger;
+          const targetId=await targetUser(data,formData.name);
+          const name=await props.table.table[targetId].name;
+          debugger;
+          return (name===props.table.auth.name);
+          }
+         const a= await tesT();
+         if(a===true){formData['status']='Active';}else{formData['status']='Blocked';}
         props.userAC(formData);
+        API.getLog(fData,tableAC)
         debugger;
-        API.getLog(fData)
-        let auth=props.table.auth;
-        let link;
-        if (tName != db[targetUser(db,tName)].name) {link='/login'} 
-        else {link='/'} 
-        navigate({link});
+        tesT();
+/* 
+        async function req(){
+          const url="http://localhost/t4/src/Component/Table/data.php";
+          const res=await axios.get(url);
+          return res.data;
+        }
+        async function tesT(){
+          debugger;
+          const data= await req();
+          debugger;
+          const b=await props.tableAC({data});
+          debugger;
+          const targetId=await targetUser(data,formData.name);
+          const name=await props.table.table[targetId].name;
+          debugger;
+          await alert(name===props.table.auth.name);
+          }
+        ; */
       } 
   return (
     <div className="container my-5">
@@ -59,9 +94,9 @@ const Login = (props) => {
      <h1 className="text-center" >Login</h1>
      </div>
      <LoginReduxForm onSubmit={onSubmit}/>
-      
+    {/*  <Button onClick={tesT}>click</Button> */}
       </div>
   );
 };
 const mapStateToProps=(state)=>{return{table:state.table}}
-export default connect(mapStateToProps,{userAC,clearAC}) (Login);
+export default connect(mapStateToProps,{userAC,clearAC,tableAC}) (Login);

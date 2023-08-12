@@ -8,7 +8,7 @@ export const withAuthNavigate =(Component)=>{
 
         render(){
             debugger;
-            if(!this.props.table.table) return <Navigate to='/login'/>;
+            if(this.props.table.auth.status!='Active') return <Navigate to='/login'/>;
             return <Component {...this.props}/>
         }
     }

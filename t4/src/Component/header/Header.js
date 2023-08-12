@@ -2,24 +2,16 @@ import React from "react";
 import { button } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { tableAC } from "../../redux/TableReducer";
-import { navLink, targetUser } from "../CommonFunc";
+import { tableAC,userAC } from "../../redux/TableReducer";
+import { Logout, navLink, targetUser } from "../CommonFunc";
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
-  let link;
-  /* let db=props.table.table;
-  let tName=props.table.auth.name;
-      let auth=props.table.auth;
-      debugger;
-      if (tName != db[targetUser(db,tName)].name) {link='/login'} 
-      else {link='/'}  */
-  link = "/";
-  
+  let link = "/";
   return (
     <div className="bg-primary.bg-gradient">
       <ul class="nav justify-content-center">
-        {navLink("/login", "Login")}
+      {props.table.auth.status==='Active'?Logout('/login','Logout',props.userAC):navLink("/login", "Login")}
         {navLink("/", "User management")}
         {navLink("/registration", "Registration")}
       </ul>
@@ -30,4 +22,4 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return { table: state.table };
 };
-export default connect(mapStateToProps, { tableAC })(Header);
+export default connect(mapStateToProps, { tableAC,userAC })(Header);

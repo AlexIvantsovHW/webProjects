@@ -23,7 +23,7 @@ const userRequest=(method,name,url,data,tableAC)=>{
     updateData(tableAC);
 }
 const API = {
-  getForm(fData,userAC,values,tableAC) {
+  getForm(fData,values,) {
     axios({
       method: "post",
       url: "http://localhost/t4/src/Component/Registration/form.php",
@@ -37,7 +37,7 @@ const API = {
         console.log(response.response.data);
       })
     console.log("Form submit data", values);
-    userAC({ name: values.name, password: values.password });
+
   },
   getBlock(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
@@ -61,8 +61,8 @@ const API = {
     userRequest('post','deleteAll',url,data,tableAC)
   },
   getLog(fData,tableAC) {
-    const url="http://localhost/t4/src/Component/Table/allDelete.php";
-    userRequest('post','deleteAll',url,fData,tableAC);
+    const url="hhttp://localhost/t4/src/Component/Login/Log.php";
+    userRequest('post','log',url,fData,tableAC);
   },
 };
 
