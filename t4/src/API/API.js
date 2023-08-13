@@ -61,7 +61,7 @@ const API = {
     userRequest('post','deleteAll',url,data,tableAC)
   },
   getLog(fData,tableAC) {
-    const url="hhttp://localhost/t4/src/Component/Login/Log.php";
+    const url="http://localhost/t4/src/Component/Login/Log.php";
     userRequest('post','log',url,fData,tableAC);
   },
 };

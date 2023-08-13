@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { userAC,clearAC,tableAC } from "../../redux/TableReducer";
 import { Field, reduxForm } from "redux-form";
-import { targetUser } from "../CommonFunc";
+import { targetUser,dbName, dbPassword } from "../CommonFunc";
 import API from "../../API/API";
 import axios from "axios";
 
@@ -41,10 +41,6 @@ const Login = (props) => {
     const res=await axios.get(url);
     return res.data;
   }
-
-
-
-  const navigate=useNavigate();
   async function onSubmit(formData){
     let fData = new FormData();  
     const db= props.table.table;
@@ -52,41 +48,21 @@ const Login = (props) => {
         fData.append("tLog",date);
         fData.append("name",formData.name);
         fData.append("password",formData.password);
+        await API.getLog(fData,tableAC)
         async function tesT(){
-          debugger;
           const data= await req();
-          debugger;
-          const b=await props.tableAC({data});
-          debugger;
-          const targetId=await targetUser(data,formData.name);
-          const name=await props.table.table[targetId].name;
-          debugger;
-          return (name===props.table.auth.name);
+          const arrName=await dbName(data);
+          const arrPassword=await dbPassword(data);
+          const tId= arrName.indexOf(formData.name);
+          const targetPassword= await arrPassword[tId];
+          let name;
+          if(tId===(-1)){name='NoName'}else{name=data[tId].name}
+          return ((name===formData.name)&&(targetPassword===formData.password));
           }
          const a= await tesT();
          if(a===true){formData['status']='Active';}else{formData['status']='Blocked';}
         props.userAC(formData);
-        API.getLog(fData,tableAC)
-        debugger;
         tesT();
-/* 
-        async function req(){
-          const url="http://localhost/t4/src/Component/Table/data.php";
-          const res=await axios.get(url);
-          return res.data;
-        }
-        async function tesT(){
-          debugger;
-          const data= await req();
-          debugger;
-          const b=await props.tableAC({data});
-          debugger;
-          const targetId=await targetUser(data,formData.name);
-          const name=await props.table.table[targetId].name;
-          debugger;
-          await alert(name===props.table.auth.name);
-          }
-        ; */
       } 
   return (
     <div className="container my-5">
@@ -94,7 +70,6 @@ const Login = (props) => {
      <h1 className="text-center" >Login</h1>
      </div>
      <LoginReduxForm onSubmit={onSubmit}/>
-    {/*  <Button onClick={tesT}>click</Button> */}
       </div>
   );
 };

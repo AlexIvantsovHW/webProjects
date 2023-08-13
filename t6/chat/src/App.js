@@ -6,8 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div className='container'>
-        <TagContainer/>
+      <div className='row'>
+      <TagContainer/>
         <WindowContainer/>
+      </div>
     </div>
   );
 }
