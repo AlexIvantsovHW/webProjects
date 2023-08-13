@@ -4,16 +4,16 @@ header('Access-Control-Allow-Methods:POST,GET,OPTIONS,PUT,DELETE');
 header('Access-Control-Allow-Headers:Content-Type, X-Auth-Token, Origin,Authorization');
     
     // Server
-   $server="localhost";
+  /*  $server="localhost";
 	$user="root";
 	$password="";
-	$db="id21119780_4tsk";
+	$db="id21119780_4tsk"; */
 
     //------------------
-    /* $server="localhost";
+    $server="localhost";
 	$user="id21130992_itaske";
 	$password="Qwerty1!";
-	$db="id21130992_itaske"; */ 
+	$db="id21130992_itaske"; 
     //-------------------
     $method=$_SERVER['REQUEST_METHOD'];
     $delete_id=$_POST;

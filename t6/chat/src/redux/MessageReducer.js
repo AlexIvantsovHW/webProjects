@@ -7,6 +7,7 @@ let initialState = {
       name: null,
       text: null,
       tag: null,
+      time:null,
     },
   ],
 };

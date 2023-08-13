@@ -18,6 +18,8 @@ header('Access-Control-Allow-Headers:Content-Type, X-Auth-Token, Origin,Authoriz
 
     if(isset($_POST["name"])){$name=$_POST['name'];}else{$name= "";}
     if(isset($_POST["text"])){$text=$_POST['text'];}else{$text= "";}
+    if(isset($_POST["tag"])){$tag=$_POST['tag'];}else{$tag= "";} 
+    if(isset($_POST["time"])){$time=$_POST['time'];}else{$time= "";} 
 
     $conn=new mysqli($server,$user,$password,$db);
 
@@ -26,7 +28,7 @@ header('Access-Control-Allow-Headers:Content-Type, X-Auth-Token, Origin,Authoriz
         exit();
     }else{
     
-        $conn->query("INSERT INTO `chat`(`name`,`text`) VALUES('$name','$text')"); 
+        $conn->query("INSERT INTO `chat`(`name`,`text`,`tag`,`time`) VALUES('$name','$text','$tag','$time')"); 
     }  
     $conn->close();
 ?>

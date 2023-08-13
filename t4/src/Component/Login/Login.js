@@ -1,11 +1,10 @@
 import { React } from "react";
 import { Button } from "react-bootstrap";
 import moment from"moment";
-import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { userAC,clearAC,tableAC } from "../../redux/TableReducer";
 import { Field, reduxForm } from "redux-form";
-import { targetUser,dbName, dbPassword } from "../CommonFunc";
+import {dbName, dbPassword } from "../CommonFunc";
 import API from "../../API/API";
 import axios from "axios";
 
@@ -27,7 +26,6 @@ const LoginForm = (props) => {
           <div className="d-flex justify-content-evenly">
           <Button  type="submit">Submit</Button>
           </div>
-        
         <div className="text-center mb-2">If you don't have an user account, please fill the regestration form</div>
       </form>
   </div>
@@ -43,8 +41,6 @@ const Login = (props) => {
   }
   async function onSubmit(formData){
     let fData = new FormData();  
-    const db= props.table.table;
-    const tName=formData.name;
         fData.append("tLog",date);
         fData.append("name",formData.name);
         fData.append("password",formData.password);
@@ -59,10 +55,8 @@ const Login = (props) => {
           if(tId===(-1)){name='NoName'}else{name=data[tId].name}
           return ((name===formData.name)&&(targetPassword===formData.password));
           }
-         const a= await tesT();
-         if(a===true){formData['status']='Active';}else{formData['status']='Blocked';}
-        props.userAC(formData);
-        tesT();
+         if(await tesT()===true){formData['status']='Active'}else{formData['status']='Blocked';}
+        props.userAC(formData)
       } 
   return (
     <div className="container my-5">
