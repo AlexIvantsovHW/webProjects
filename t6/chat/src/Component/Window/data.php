@@ -12,8 +12,8 @@ header('Access-Control-Allow-Headers:Content-Type, X-Auth-Token, Origin,Authoriz
     //------------------
     /* $server="localhost";
 	$user="id21139145_ichat";
-	$password="Qwerty1!";
-	$db="id21139145_ichat"; */ 
+	$password="qwertY1!";
+	$db="id21139145_ichat";  */
     //-------------------
     $method=$_SERVER['REQUEST_METHOD'];
 

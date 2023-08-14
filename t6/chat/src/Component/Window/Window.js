@@ -3,7 +3,6 @@ import {messageForm, tagWord} from "./Message";
 import API from "../API/API";
 import { Field,reduxForm } from "redux-form";
 import moment from"moment";
-import axios from "axios";
 
 const date = moment().format("YY-MM-DD HH:mm:ss");
 const WindowForm= (props) => { 
@@ -27,11 +26,12 @@ const WindowForm= (props) => {
 const WindowReduxForm = reduxForm({ form: "message" })(WindowForm);
 
 const Window= (props) => {
-debugger;
+
   const messageData = props.message.Message;
-  const messageList = messageData.map((el) =>
-    messageForm(el.name, el.text,el.time)
-  );
+  const tagFilter=props.message.Filter;
+  let filterMessages = messageData.filter((o) => tagFilter.includes(o.tag));
+  debugger;
+  const messageList =(filterMessages.length>0?filterMessages.map((el)=>messageForm(el.name, el.text,el.time)):messageData.map((el)=>messageForm(el.name, el.text,el.time))) ;
   function onSubmit(formData){
     const tag=tagWord(formData.text);
     let fData = new FormData();  

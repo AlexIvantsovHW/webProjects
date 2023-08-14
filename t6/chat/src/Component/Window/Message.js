@@ -4,7 +4,7 @@ import React from "react";
 
 export function messageForm(name,text,time){
     return(
-        <div className="d-flex justify-content-around border border-dark">
+        <div className="d-flex justify-content-around">
         <div >{name}</div>
         <div >{text}</div>
         <div >{time}</div>
