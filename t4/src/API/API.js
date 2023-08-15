@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const updateData=(tableAC)=>{
-  const url="http://localhost/t4/src/Component/Table/data.php";
+  const url="http://localhost/webProjects/t4/src/Component/Table/data.php";
     axios
         .get(url).then(response=>response.data)
         .then((data)=>{tableAC({data})}); 
@@ -26,7 +26,7 @@ const API = {
   getForm(fData,values,) {
     axios({
       method: "post",
-      url: "http://localhost/t4/src/Component/Registration/form.php",
+      url: "http://localhost/webProjects/t4/src/Component/Registration/form.php",
       data: fData,
       config: { headers: { "Content-Type": "multipart/form-data" } },
     })
@@ -41,29 +41,39 @@ const API = {
   },
   getBlock(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    const url="http://localhost/t4/src/Component/Table/block.php";
+    const url="http://localhost/webProjects/t4/src/Component/Table/block.php";
     userRequest('post','block',url,data,tableAC)
   },
 
   getUnBlock(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    const url="http://localhost/t4/src/Component/Table/active.php";
+    const url="http://localhost/webProjects/t4/src/Component/Table/active.php";
     userRequest('post','unblock',url,data,tableAC)
   },
   getDelete(isChecked,tableAC) {
     const data = JSON.stringify(isChecked);
-    const url="http://localhost/t4/src/Component/Table/delete.php";
+    const url="http://localhost/webProjects/t4/src/Component/Table/delete.php";
     userRequest('post','delete',url,data,tableAC)
   },
   getDelAll(tableAC) {
     const data = JSON.stringify("dataTable");
-    const url="http://localhost/t4/src/Component/Table/allDelete.php";
+    const url="http://localhost/webProjects/t4/src/Component/Table/allDelete.php";
     userRequest('post','deleteAll',url,data,tableAC)
   },
   getLog(fData,tableAC) {
-    const url="http://localhost/t4/src/Component/Login/Log.php";
-    userRequest('post','log',url,fData,tableAC);
+    axios({
+      method:'post',
+      url: 'http://localhost/webProjects/t4/src/Component/Login/Log.php',
+      data: fData,
+      config: { headers: { "Content-Type": "multipart/form-data" } },
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
+      updateData(tableAC);
   },
 };
-
 export default API;

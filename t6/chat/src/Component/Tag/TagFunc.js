@@ -9,25 +9,27 @@ export function getTags(data){
     return Array.from(new Set(x)).filter(Boolean);
     
 }
-export function getForm(id,value,chd,arr,func,handlecheckbox,deleteItem,setShowEdit){
-    debugger;
- (
-        <div>
-                
-        <li key={id} onClick={() => setShowEdit(id)}>
-        <input type='checkbox'                   
-            value={value}
-          checked={chd}
-          onChange={(e) => handlecheckbox(e)}/>{value}
-          <button
-            className="delete-button bg-light"
-            onClick={() => deleteItem(arr,id,func)}
-          >
-            ❌
-          </button>
-        </li>
-
-      </div>
-    )
+export function getLi(id,value,isChecked,handle,setShowEdit){
+  return(
+    <li
+    key={id}
+    onClick={() => setShowEdit(id)}
+    className="nav-item" 
+  >
+    <input
+      type="checkbox"
+      value={value}
+      checked={isChecked}
+      onChange={handle}
+      className="form-check-input me-1"
+    />
+    <i class="fs-4 bi-table"></i>
+    <span className="ms-1 d-none d-sm-inline">{value}</span>
+  </li>
+  )
 }
-  
+export function getButton(deleteItem,items,id,setItems,name){
+  return(
+    <button className="bg-white border-white col-1 " onClick={() => deleteItem(items, id, setItems)}>{name}</button>
+  )
+}

@@ -5,13 +5,7 @@ import { userAC } from "../../redux/TableReducer";
 
 
 class RegistationContainer extends React.Component{
-    render(){
-        return(
-            <>
-            <Registation userAC={this.props.userAC}/>
-            </>
-        )
-    }
+    render(){return(<><Registation userAC={this.props.userAC}/></>)}
 }
 
 const mapStateToProps=(state)=>{return{table:state.table}}

@@ -5,13 +5,12 @@ import { Regform, initialValues, validateSchema, onSubmit } from "./RegForm";
 import moment from "moment";
 import { useNavigate } from "react-router";
 import API from "../../API/API";
+import { submitSVG } from "../CommonFunc";
 const date = moment().format("YYYY-MM-DD HH:mm:ss");
-
 
 const Registation = (props) => {
   const navigate = useNavigate();
   const onSubmit = (values) => {
-    debugger;
     let fData = new FormData();
     fData.append("name", values.name);
     fData.append("email", values.email);
@@ -37,10 +36,7 @@ const Registation = (props) => {
               {Regform("name")}
               {Regform("email")}
               {Regform("password")}
-              <div>
-                <Button type="submit">Submit</Button>
-              
-              </div>
+              <div><Button className="btn bg-success" type="submit">{submitSVG} Submit</Button></div>
             </div>
           </div>
         </div>

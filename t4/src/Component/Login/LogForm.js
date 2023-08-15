@@ -20,13 +20,11 @@ export function LogForm(name) {
     </div>
   );
 }
-
 export const initialValues = { name: "", email: "", password: "" };
 export const onSubmit = (values) => {
   console.log("Form data", values);
   console.log("Reg date", date);
 };
-
 export const validateSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().required("Required"),

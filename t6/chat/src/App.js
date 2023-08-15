@@ -1,15 +1,15 @@
-import './App.css';
-import TagContainer from './Component/Tag/TagContainer';
-import WindowContainer from './Component/Window/WindowContainer';
-import "bootstrap/dist/css/bootstrap.min.css";
+import TagContainer from "./Component/Tag/TagContainer";
+import WindowContainer from "./Component/Window/WindowContainer";
 
+import  "./Component/style.css";
 function App() {
   return (
-    <div className='container'>
-      <div className='row'>
-      <TagContainer/>
-        <WindowContainer/>
-      </div>
+    
+    <div className='container-fluid row justify-content-md-center"'>
+
+        <TagContainer />
+         <WindowContainer />
+       
     </div>
   );
 }

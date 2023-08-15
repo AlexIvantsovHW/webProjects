@@ -4,9 +4,7 @@ import * as Yup from 'yup';
 import moment from"moment";
 const date = moment().format('YYYY-MM-DD HH:mm:ss');
 
-function TextError(props) {
-  return <div className="error">{props.children}</div>;
-}
+function TextError(props) {return <div className="error">{props.children}</div>;}
 export function Regform(name) {
   return (
     <div className="mb-5">

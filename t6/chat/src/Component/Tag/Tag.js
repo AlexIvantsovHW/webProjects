@@ -1,64 +1,54 @@
 import { React, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Filter, deleteItem, getTags, getForm } from "./TagFunc";
+import { Filter, deleteItem, getButton, getLi, getTags } from "./TagFunc";
+import { trash } from "./utilit";
+import  '../style.css'
 
 const Tag = (props) => {
+  const handle = (e) => handlecheckbox(e);
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
   const [isChecked, setChecked] = useState([]);
   const [showEdit, setShowEdit] = useState(-1);
   const message = props.message.Message;
-  
   const tags = getTags(message);
-
   const handlecheckbox = (e) => {
     const { value, checked } = e.target;
     if (checked) {
-      debugger;
       setChecked([...isChecked, value]);
     } else {
-      debugger;
       setChecked(isChecked.filter((e) => e !== value));
-      
-    }/* 
-    debugger;
-    Filter(isChecked, props.filterAC); */
+    }
   };
-  function approve(){
+  function approve() {
     Filter(isChecked, props.filterAC);
   }
-
   function addItem() {
     if (!newItem) {
       alert("Press enter a tag.");
       return;
     }
-
     const item = {
       id: Math.floor(Math.random() * 1000),
       value: "#" + newItem,
     };
-
     setItems((oldList) => [...oldList, item]);
-
     setNewItem("");
   }
-
   function editItem(id, newText) {
     const currentItem = items.filter((item) => item.id === id);
-
     const newItem = {
       id: currentItem.id,
       value: newText,
     };
-
     deleteItem(items, id, setItems);
-
     setItems((oldList) => [...oldList, newItem]);
     setShowEdit(-1);
   }
   return (
-    <div className="col">
+    <div className="col-10 row flex-nowrap">
+      <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
       <h1>#Tag list</h1>
       <input
         type="text"
@@ -66,48 +56,27 @@ const Tag = (props) => {
         value={newItem}
         onChange={(e) => setNewItem(e.target.value)}
       />
-      <button onClick={() => addItem()}>Add</button>
-      <ul>
-        {items.map((item) => {
-  debugger;
-  return (
-            <div>
-              <li key={item.id} onClick={() => setShowEdit(item.id)}>
-                <input
-                  type="checkbox"
-                  value={item.value}
-                  checked={item.isChecked}
-                  onChange={(e) => handlecheckbox(e)}
-                />
-                {item.value}
-                <button
-                  className="delete-button bg-light"
-                  onClick={() => deleteItem(items, item.id, setItems)}
-                >❌</button>
-              </li>
-            </div>
-          );
-        })}
-
-        {tags.map((item) => {
+      <button
+        onClick={() => addItem()}
+        className="btn btn-outline-success"
+      >Add tag</button>
+      <ul className="list-group">
+        {items.map((el) => {
           return (
-            <div>
-              <li>
-                <input
-                  type="checkbox"
-                  value={item}
-                  checked={item.isChecked}
-                  onChange={(e) => handlecheckbox(e)}
-                />
-                {item}
-              </li>
+            <div className="container">
+              <div className="row ">
+                {getLi(el.id, el.value, el.isChecked, handle, setShowEdit)}
+               {/*  {getButton(deleteItem, items, el.id, setItems, trash)} */}
+              </div>
             </div>
           );
         })}
+        {tags.map((el) => {return (<div className="row">{getLi(null, el, el.isChecked, handle, setShowEdit)}</div>);})}
       </ul>
-      <button onClick={approve}>Dispay</button>
+      <button className="btn btn-outline-success" onClick={approve}>Dispay</button>
+      </div>
+      </div>
     </div>
-    
   );
 };
 export default Tag;

@@ -1,10 +1,11 @@
 
 import React from "react";
+import '../style.css';
 
 
 export function messageForm(name,text,time){
     return(
-        <div className="d-flex justify-content-around">
+        <div className="form">
         <div >{name}</div>
         <div >{text}</div>
         <div >{time}</div>

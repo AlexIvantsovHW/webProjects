@@ -1,13 +1,9 @@
 import React from "react";
-import { button } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { tableAC,userAC } from "../../redux/TableReducer";
-import { Logout, navLink, targetUser } from "../CommonFunc";
-import { NavLink } from "react-router-dom";
-
+import { Logout, navLink} from "../CommonFunc";
 const Header = (props) => {
-  let link = "/";
   return (
     <div className="bg-primary.bg-gradient">
       <ul class="nav justify-content-center">
@@ -18,8 +14,5 @@ const Header = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = (state) => {
-  return { table: state.table };
-};
+const mapStateToProps = (state) => {return { table: state.table };};
 export default connect(mapStateToProps, { tableAC,userAC })(Header);
