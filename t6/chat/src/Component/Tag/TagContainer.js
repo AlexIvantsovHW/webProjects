@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "./Tag";
+import TagList from "./TagList";
 import { connect } from "react-redux";
 import { filterAC,tagsAC } from "../../redux/MessageReducer";
 
@@ -8,7 +8,7 @@ import { filterAC,tagsAC } from "../../redux/MessageReducer";
 class TagContainer extends React.Component{
     render(){
         return(
-            <Tag message={this.props.message} filterAC={this.props.filterAC} tagsAC={this.props.tagsAC}/>
+            <TagList message={this.props.message} filterAC={this.props.filterAC} tagsAC={this.props.tagsAC}/>
         )
     }
 }

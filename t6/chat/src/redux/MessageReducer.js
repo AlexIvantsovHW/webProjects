@@ -22,7 +22,7 @@ const MessageReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MESSAGE:return { ...state, Message: [...action.data.data] };
     case SET_FILTER:return { ...state, Filter: [...action.filter] };
-    case SET_INIT_TAGS:return { ...state, initTags: [...action.tags] };
+    case SET_INIT_TAGS:debugger; return { ...state, Filter:action.tags };
     default:
       return { ...state };
   }

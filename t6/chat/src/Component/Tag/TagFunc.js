@@ -4,10 +4,10 @@ export function deleteItem(items,id,setItems) {
     setItems(newArray);}
 
 export function getTags(data){
+  debugger;
     let x=[];
     for (let i=0;i<data.length;i++){x.push(data[i].tag)}
     return Array.from(new Set(x)).filter(Boolean);
-    
 }
 export function getLi(id,value,isChecked,handle,setShowEdit){
   return(

@@ -4,7 +4,13 @@ import { Filter, deleteItem, getButton, getLi, getTags } from "./TagFunc";
 import { trash } from "./utilit";
 import  '../style.css'
 
-const Tag = (props) => {
+import { addSVG, liGenerator } from "../ComonFunc";
+
+const arr = ["Text-1", "Texsdsdt-1", "Text-1", "Text-1", "Text-1"];
+const TagList = (props) => {
+  debugger;
+  let Tags=props.message.initTags; 
+  debugger;
   const handle = (e) => handlecheckbox(e);
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
@@ -37,46 +43,35 @@ const Tag = (props) => {
   }
   function editItem(id, newText) {
     const currentItem = items.filter((item) => item.id === id);
-    const newItem = {
-      id: currentItem.id,
-      value: newText,
-    };
+    const newItem = {id: currentItem.id,value: newText,};
     deleteItem(items, id, setItems);
     setItems((oldList) => [...oldList, newItem]);
     setShowEdit(-1);
   }
+  debugger;
   return (
-    <div className="col-10 row flex-nowrap">
-      <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-        <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-      <h1>#Tag list</h1>
-      <input
-        type="text"
-        placeholder="Add an item..."
-        value={newItem}
-        onChange={(e) => setNewItem(e.target.value)}
-      />
-      <button
-        onClick={() => addItem()}
-        className="btn btn-outline-success"
-      >Add tag</button>
-      <ul className="list-group">
-        {items.map((el) => {
-          return (
-            <div className="container">
-              <div className="row ">
-                {getLi(el.id, el.value, el.isChecked, handle, setShowEdit)}
-               {/*  {getButton(deleteItem, items, el.id, setItems, trash)} */}
-              </div>
+    <div className="col-4 bg-dark  border-right border-white ">
+          <h1 className="text-white text-center">Tag list</h1>
+          <div className="row ">
+            <div className="col ">
+              <input 
+              type="text"
+              placeholder="Add an item..."
+              value={newItem}
+              onChange={(e) => setNewItem(e.target.value)}
+              />
             </div>
-          );
-        })}
-        {tags.map((el) => {return (<div className="row">{getLi(null, el, el.isChecked, handle, setShowEdit)}</div>);})}
-      </ul>
-      <button className="btn btn-outline-success" onClick={approve}>Dispay</button>
-      </div>
-      </div>
-    </div>
-  );
+            <div className="col">
+              <button className="btn btn-success" onClick={() => addItem()}>{addSVG}</button>
+            </div>
+            <ul className="my-3 list-group d-flex align-content-center border-white">
+              {items.map((el) => {return liGenerator(el.value,deleteItem);})}
+            </ul>
+          </div>
+          <div>
+            <button className="btn btn-success" onClick={()=>(props.filterAC(items))}>Display</button>
+          </div>
+        </div>
+     );
 };
-export default Tag;
+export default TagList;

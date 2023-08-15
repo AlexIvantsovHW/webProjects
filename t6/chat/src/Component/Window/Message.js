@@ -4,6 +4,7 @@ import '../style.css';
 
 
 export function messageForm(name,text,time){
+  debugger;
     return(
         <div className="form">
         <div >{name}</div>
